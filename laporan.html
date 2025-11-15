@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Laporan — Keuangan Cute</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-page="laporan">
+  <nav class="topnav">
+    <div class="brand">💖 Transaksi Keuangan</div>
+    <div class="nav-right">
+      <button id="themeToggle" class="icon-btn">🌙</button>
+      <button id="musicBtn" class="icon-btn">🎵</button>
+      <a href="index.html" class="navlink">Beranda</a>
+      <a href="transaksi.html" class="navlink">Transaksi</a>
+      <a href="laporan.html" class="navlink active">Laporan</a>
+    </div>
+  </nav>
+
+  <main class="page container">
+    <section class="card">
+      <h2>Grafik Bulanan</h2>
+      <canvas id="barChart" style="max-height:350px"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>Distribusi per Kategori</h2>
+      <canvas id="donutChart" style="max-height:350px"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>Ringkasan Tahun Ini</h2>
+      <div id="yearSummary"></div>
+    </section>
+  </main>
+
+  <audio id="bgAudio" loop>
+    <source src="music/lagu.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aplikasi Keuanganmu</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-page="home">
+  <nav class="topnav">
+    <div class="brand">💖 Transaksi Keuangan </div>
+    <div class="nav-right">
+      <button id="themeToggle" class="icon-btn">🌙</button>
+      <button id="musicBtn" class="icon-btn">🎵</button>
+      <a href="index.html" class="navlink active">Beranda</a>
+      <a href="transaksi.html" class="navlink">Transaksi</a>
+      <a href="laporan.html" class="navlink">Laporan</a>
+    </div>
+  </nav>
+
+  <main class="page container">
+    <section class="card hero">
+      <h1>Halo! Selamat datang 🌸</h1>
+      <p class="muted">Ringkasan cepat keuanganmu</p>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="label">Total Pemasukan</div>
+          <div id="sumIncome" class="value">Rp0</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Total Pengeluaran</div>
+          <div id="sumExpense" class="value">Rp0</div>
+        </div>
+        <div class="summary-card">
+          <div class="label">Saldo</div>
+          <div id="sumBalance" class="value">Rp0</div>
+        </div>
+      </div>
+
+      <div class="home-actions">
+        <a href="transaksi.html" class="btn primary">Tambah / Kelola Transaksi</a>
+        <a href="laporan.html" class="btn ghost">Lihat Laporan & Grafik</a>
+      </div>
+    </section>
+
+    <section class="card small">
+      <h3>Progress Target</h3>
+      <div class="row">
+        <input id="homeGoalInput" type="number" placeholder="Masukkan target (Rp)">
+        <button id="homeSaveGoal" class="btn">Simpan Target</button>
+      </div>
+      <div id="homeGoalText" class="muted" style="margin-top:10px">Belum ada target.</div>
+      <div class="progress-bar" aria-hidden><div id="homeProgress" class="progress"></div></div>
+    </section>
+
+    <section class="card small">
+      <h3>Terbaru</h3>
+      <ul id="homeRecent" class="mini-list"></ul>
+    </section>
+  </main>
+
+  <!-- audio -->
+  <audio id="bgAudio" loop>
+    <source src="music/lagu.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

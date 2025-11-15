@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Transaksi — Keuangan Cute</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-page="transaksi">
+  <nav class="topnav">
+    <div class="brand">💖 Transaksi Keuangan</div>
+    <div class="nav-right">
+      <button id="themeToggle" class="icon-btn">🌙</button>
+      <button id="musicBtn" class="icon-btn">🎵</button>
+      <a href="index.html" class="navlink">Beranda</a>
+      <a href="transaksi.html" class="navlink active">Transaksi</a>
+      <a href="laporan.html" class="navlink">Laporan</a>
+    </div>
+  </nav>
+
+  <main class="page container">
+    <section class="card">
+      <h2>Tambah / Edit Transaksi</h2>
+      <form id="txForm" class="form-grid">
+        <input id="txDesc" type="text" placeholder="Deskripsi (mis: Gaji, Makan)" required>
+        <input id="txAmount" type="number" placeholder="Jumlah (Rp)" required>
+        <select id="txType">
+          <option value="income">💰 Pemasukan</option>
+          <option value="expense">💸 Pengeluaran</option>
+        </select>
+        <select id="txCategory"></select>
+        <input id="txDate" type="date" value="">
+        <div class="fullrow">
+          <button type="submit" class="btn primary">Simpan</button>
+          <button type="button" id="txReset" class="btn ghost">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Filter & Cari</h2>
+      <div class="row">
+        <input id="search" type="text" placeholder="Cari deskripsi atau kategori...">
+        <select id="filterType">
+          <option value="all">Semua</option>
+          <option value="income">Pemasukan</option>
+          <option value="expense">Pengeluaran</option>
+        </select>
+        <select id="sortBy">
+          <option value="newest">Terbaru</option>
+          <option value="amount_desc">Jumlah (besar → kecil)</option>
+          <option value="amount_asc">Jumlah (kecil → besar)</option>
+        </select>
+        <button id="exportCSV" class="btn">Export CSV</button>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>Daftar Transaksi</h2>
+      <ul id="txList" class="tx-list"></ul>
+    </section>
+  </main>
+
+  <!-- modal detail -->
+  <div id="modal" class="modal" style="display:none">
+    <div class="modal-card">
+      <button id="modalClose" class="modal-close">✕</button>
+      <h3 id="modalTitle">Detail</h3>
+      <div id="modalBody"></div>
+      <div class="row" style="margin-top:12px">
+        <button id="modalEdit" class="btn">Edit</button>
+        <button id="modalDelete" class="btn danger">Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="bgAudio" loop>
+    <source src="music/lagu.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
