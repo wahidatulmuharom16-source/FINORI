@@ -194,11 +194,13 @@ function initTransaksi(){
   // modal controls (if modal exists)
   const modalClose = document.getElementById('modalClose');
   if(modalClose) modalClose.addEventListener('click', closeModal);
+
   const modalEdit = document.getElementById('modalEdit');
   if(modalEdit) modalEdit.addEventListener('click', ()=> {
     const id = document.getElementById('modal')?.dataset.txid;
     if(id){ openEditTx(id); closeModal(); }
   });
+
   const modalDelete = document.getElementById('modalDelete');
   if(modalDelete) modalDelete.addEventListener('click', ()=> {
     const id = document.getElementById('modal')?.dataset.txid;
@@ -248,11 +250,13 @@ function renderTxList(){
 }
 
 // modal
-function openModal(id){
-  const tx = state.transactions.find(t=>t.id===id);
-  if(!tx) return;
-  const modal = document.getElementById('modal'); if(!modal) return;
-  modal.style.display='flex'; modal.dataset.txid = id;
+function openModal(id) {
+  const tx = state.transactions.find(t => t.id === id);
+  if (!tx) return;
+  const modal = document.getElementById('modal');
+  modal.style.display = 'flex';
+  modal.dataset.txid = id;  // simpan id di modal agar bisa dihapus nanti
+
   document.getElementById('modalTitle').textContent = tx.desc;
   document.getElementById('modalBody').innerHTML = `
     <p><b>Jumlah:</b> ${formatIDR(tx.amount)}</p>
@@ -261,7 +265,14 @@ function openModal(id){
     <p><b>Tanggal:</b> ${tx.date}</p>
   `;
 }
-function closeModal(){ const m = document.getElementById('modal'); if(m){ m.style.display='none'; delete m.dataset.txid; } }
+
+function closeModal(){
+  const modal = document.getElementById('modal');
+  if(!modal) return;
+  modal.style.display = 'none';
+  // bersihkan id transaksi yang tersimpan
+  delete modal.dataset.txid;
+}
 
 // edit from modal
 function openEditTx(id){
@@ -290,11 +301,30 @@ function exportCSV(){
 function initLaporan(){
   renderLaporanCharts();
   renderYearSummary();
-  // redraw on resize
+
+  // ==== AUTO UPDATE BULAN & TAHUN ====
+  let lastMonth = new Date().getMonth();
+  let lastYear  = new Date().getFullYear();
+
+  setInterval(() => {
+    const now = new Date();
+    if (now.getMonth() !== lastMonth || now.getFullYear() !== lastYear) {
+      lastMonth = now.getMonth();
+      lastYear  = now.getFullYear();
+
+      renderLaporanCharts();
+      renderYearSummary();
+    }
+  }, 60000); // cek setiap 1 menit
+  // ====================================
+
+
+  // REDRAW KETIKA LAYAR DIRESIZE
   window.addEventListener('resize', ()=> {
     renderLaporanCharts();
   });
 }
+
 
 // chart instances
 let barChart=null, donutChart=null;
